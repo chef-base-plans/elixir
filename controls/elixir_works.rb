@@ -24,7 +24,6 @@ control 'core-plans-elixir-works' do
   describe plan_installation_directory do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
-    its('stderr') { should be_empty }
   end
 
   # (2) binaries should return the correct version
@@ -36,11 +35,10 @@ control 'core-plans-elixir-works' do
     "mix",
   ].each do |binary_name, value|
     command_full_path = File.join(plan_installation_directory.stdout.strip, "bin", binary_name)
-    describe command("hab pkg exec #{plan_origin}/#{plan_name} #{command_full_path} --version") do
+    describe command("hab pkg exec #{plan_origin}/#{plan_name} -- #{command_full_path} --version") do
       its('exit_status') { should eq 0 }
       its('stdout') { should_not be_empty }
       its('stdout') { should match /#{plan_pkg_version}/ }
-      its('stderr') { should be_empty }
     end
   end
   
@@ -51,7 +49,6 @@ control 'core-plans-elixir-works' do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
     its('stdout') { should match /#{root_path_of_erlang_binary}\/bin\/erl/ }
-    its('stderr') { should be_empty }
   end
 
   # (4) locale must be set to UTF-8
@@ -60,6 +57,5 @@ control 'core-plans-elixir-works' do
     its('stdout') { should_not be_empty }
     its('stdout') { should match /LANG=en_US.UTF-8/ }
     its('stdout') { should match /LC_ALL=en_US.UTF-8/ }
-    its('stderr') { should be_empty }
   end
 end
