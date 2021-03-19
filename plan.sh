@@ -6,7 +6,7 @@ pkg_upstream_url=http://elixir-lang.org
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_license=('Apache-2.0')
 pkg_source="https://github.com/elixir-lang/elixir/archive/v${pkg_version}.tar.gz"
-pkg_shasum=9d2019282e5de770483a34c96c10c0c1d3f365b0b80796b5d11c6d11c385683e
+pkg_shasum=85c7118a0db6007507313db5bddf370216d9394ed7911fe80f21e2fbf7f54d29
 pkg_deps=(
   core/busybox
   core/cacerts
